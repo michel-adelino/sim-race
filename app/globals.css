@@ -44,43 +44,43 @@
 }
 
 .dark {
-  /* Updated dark theme colors for modern admin dashboard aesthetic */
-  --background: oklch(0.11 0 0);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.15 0 0);
-  --popover-foreground: oklch(0.98 0 0);
-  --primary: oklch(0.65 0.25 265);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.2 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.2 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.2 0 0);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.22 0 0);
-  --input: oklch(0.22 0 0);
-  --ring: oklch(0.65 0.25 265);
-  --chart-1: oklch(0.65 0.25 265);
-  --chart-2: oklch(0.7 0.18 165);
-  --chart-3: oklch(0.75 0.2 70);
-  --chart-4: oklch(0.65 0.27 305);
-  --chart-5: oklch(0.68 0.25 15);
-  --success: oklch(0.6 0.18 150);
-  --success-foreground: oklch(0.95 0.12 150);
-  --warning: oklch(0.7 0.18 85);
-  --warning-foreground: oklch(0.98 0.1 85);
-  --sidebar: oklch(0.15 0 0);
-  --sidebar-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.65 0.25 265);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.2 0 0);
-  --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(0.22 0 0);
-  --sidebar-ring: oklch(0.65 0.25 265);
+  /* Sophisticated dark theme with #101010 base */
+  --background: oklch(0.063 0 0); /* #101010 */
+  --foreground: oklch(0.95 0 0);
+  --card: oklch(0.12 0 0); /* Slightly lighter than background */
+  --card-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.12 0 0);
+  --popover-foreground: oklch(0.95 0 0);
+  --primary: oklch(0.7 0.25 260); /* Sophisticated blue-purple */
+  --primary-foreground: oklch(0.95 0 0);
+  --secondary: oklch(0.18 0 0); /* Darker secondary */
+  --secondary-foreground: oklch(0.9 0 0);
+  --muted: oklch(0.18 0 0);
+  --muted-foreground: oklch(0.6 0 0);
+  --accent: oklch(0.22 0 0); /* Subtle accent */
+  --accent-foreground: oklch(0.9 0 0);
+  --destructive: oklch(0.6 0.25 15); /* Refined red */
+  --destructive-foreground: oklch(0.95 0 0);
+  --border: oklch(0.25 0 0); /* Subtle borders */
+  --input: oklch(0.18 0 0);
+  --ring: oklch(0.7 0.25 260);
+  --chart-1: oklch(0.7 0.25 260); /* Primary blue */
+  --chart-2: oklch(0.65 0.2 180); /* Cyan */
+  --chart-3: oklch(0.7 0.2 120); /* Green */
+  --chart-4: oklch(0.65 0.25 300); /* Purple */
+  --chart-5: oklch(0.7 0.2 60); /* Yellow */
+  --success: oklch(0.65 0.2 140); /* Refined success */
+  --success-foreground: oklch(0.95 0 0);
+  --warning: oklch(0.7 0.2 80); /* Refined warning */
+  --warning-foreground: oklch(0.1 0 0);
+  --sidebar: oklch(0.08 0 0); /* Darker sidebar */
+  --sidebar-foreground: oklch(0.9 0 0);
+  --sidebar-primary: oklch(0.7 0.25 260);
+  --sidebar-primary-foreground: oklch(0.95 0 0);
+  --sidebar-accent: oklch(0.15 0 0);
+  --sidebar-accent-foreground: oklch(0.9 0 0);
+  --sidebar-border: oklch(0.2 0 0);
+  --sidebar-ring: oklch(0.7 0.25 260);
 }
 
 @theme inline {
@@ -132,5 +132,125 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.05) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+  
+  /* Sophisticated scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: oklch(0.08 0 0);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.25 0 0);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.35 0 0);
+  }
+  
+  /* Enhanced focus states */
+  .focus-visible {
+    @apply ring-2 ring-primary/50 ring-offset-2 ring-offset-background;
+  }
+  
+  /* Sophisticated card hover effects */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 10px 25px -5px rgba(0, 0, 0, 0.3),
+      0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Glass morphism effect for modals and overlays */
+  .glass {
+    background: rgba(16, 16, 16, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Sophisticated button animations */
+  .btn-sophisticated {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .btn-sophisticated::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  .btn-sophisticated:hover::before {
+    left: 100%;
+  }
+  
+  /* Sophisticated loading animation */
+  .loading-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  /* Enhanced table styling */
+  .table-sophisticated {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .table-sophisticated th {
+    background: linear-gradient(135deg, oklch(0.15 0 0), oklch(0.12 0 0));
+    border-bottom: 2px solid oklch(0.25 0 0);
+  }
+  
+  .table-sophisticated tr:hover {
+    background: linear-gradient(90deg, oklch(0.18 0 0), oklch(0.15 0 0));
+  }
+  
+  /* Status badges with sophisticated styling */
+  .status-badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .status-approved {
+    @apply bg-green-500/20 text-green-400 border-green-500/30;
+  }
+  
+  .status-pending {
+    @apply bg-yellow-500/20 text-yellow-400 border-yellow-500/30;
+  }
+  
+  .status-rejected {
+    @apply bg-red-500/20 text-red-400 border-red-500/30;
   }
 }

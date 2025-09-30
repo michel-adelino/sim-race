@@ -81,29 +81,38 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <PageHeader
-        title="Car Setups"
-        description={`Browse and manage car setups for your team. ${filteredAndSortedSetups.length} setup${filteredAndSortedSetups.length !== 1 ? "s" : ""} found.`}
-      />
+    <div className="space-y-8 relative">
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
+      
+      <div className="relative z-10">
+        <PageHeader
+          title="Car Setups"
+          description={`Browse and manage car setups for your team. ${filteredAndSortedSetups.length} setup${filteredAndSortedSetups.length !== 1 ? "s" : ""} found.`}
+        />
+      </div>
 
-      <SetupFilters
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        selectedCar={selectedCar}
-        setSelectedCar={setSelectedCar}
-        selectedTrack={selectedTrack}
-        setSelectedTrack={setSelectedTrack}
-        selectedSeason={selectedSeason}
-        setSelectedSeason={setSelectedSeason}
-        selectedWeek={selectedWeek}
-        setSelectedWeek={setSelectedWeek}
-        sortBy={sortBy}
-        setSortBy={setSortBy}
-        onClearFilters={handleClearFilters}
-      />
+      <div className="relative z-10">
+        <SetupFilters
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          selectedCar={selectedCar}
+          setSelectedCar={setSelectedCar}
+          selectedTrack={selectedTrack}
+          setSelectedTrack={setSelectedTrack}
+          selectedSeason={selectedSeason}
+          setSelectedSeason={setSelectedSeason}
+          selectedWeek={selectedWeek}
+          setSelectedWeek={setSelectedWeek}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          onClearFilters={handleClearFilters}
+        />
+      </div>
 
-      <SetupsTable setups={filteredAndSortedSetups} />
+      <div className="relative z-10">
+        <SetupsTable setups={filteredAndSortedSetups} />
+      </div>
     </div>
   )
 }
