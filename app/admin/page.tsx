@@ -70,42 +70,29 @@ export default function AdminPage() {
           </CardContent>
         </Card>
       ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle>Pending Setups ({pendingSetups.length})</CardTitle>
-            <CardDescription>Review and approve or reject submitted setups.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Setup Name</TableHead>
-                  <TableHead>Car</TableHead>
-                  <TableHead>Track</TableHead>
-                  <TableHead className="hidden sm:table-cell">Week</TableHead>
-                  <TableHead className="hidden lg:table-cell">Submitted By</TableHead>
-                  <TableHead className="hidden xl:table-cell">Submitted</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {pendingSetups.map((setup) => (
-                  <TableRow key={setup.id}>
-                    <TableCell>
-                      <div>
-                        <div className="font-medium">{setup.name}</div>
-                        {setup.notes && <div className="text-xs text-muted-foreground line-clamp-1">{setup.notes}</div>}
-                      </div>
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">{setup.car}</TableCell>
-                    <TableCell className="text-muted-foreground">{setup.track}</TableCell>
-                    <TableCell className="hidden sm:table-cell text-muted-foreground">Week {setup.week}</TableCell>
-                    <TableCell className="hidden lg:table-cell text-muted-foreground">{setup.uploadedByName}</TableCell>
-                    <TableCell className="hidden xl:table-cell text-muted-foreground">
-                      {formatDistanceToNow(setup.lastUpdated, { addSuffix: true })}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center justify-end gap-1">
+        <>
+          {/* Mobile Card View */}
+          <div className="lg:hidden space-y-4">
+            {pendingSetups.map((setup) => (
+              <Card key={setup.id} className="card-hover">
+                <CardContent className="p-4">
+                  <div className="space-y-3">
+                    <div>
+                      <h3 className="font-medium text-foreground">{setup.name}</h3>
+                      <p className="text-sm text-muted-foreground">{setup.car} • {setup.track}</p>
+                      {setup.notes && (
+                        <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{setup.notes}</p>
+                      )}
+                    </div>
+                    
+                    <div className="flex items-center justify-between text-sm text-muted-foreground">
+                      <span>Week {setup.week}</span>
+                      <span>{formatDistanceToNow(setup.lastUpdated, { addSuffix: true })}</span>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-muted-foreground">By {setup.uploadedByName}</span>
+                      <div className="flex items-center gap-2">
                         <EditSetupDialog setup={setup} onSave={(updates) => handleEdit(setup.id, updates)} />
                         <Button
                           variant="ghost"
@@ -126,13 +113,78 @@ export default function AdminPage() {
                           <span className="sr-only">Reject</span>
                         </Button>
                       </div>
-                    </TableCell>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Desktop Table View */}
+          <Card className="hidden lg:block">
+            <CardHeader>
+              <CardTitle>Pending Setups ({pendingSetups.length})</CardTitle>
+              <CardDescription>Review and approve or reject submitted setups.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Setup Name</TableHead>
+                    <TableHead>Car</TableHead>
+                    <TableHead>Track</TableHead>
+                    <TableHead>Week</TableHead>
+                    <TableHead>Submitted By</TableHead>
+                    <TableHead>Submitted</TableHead>
+                    <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
+                </TableHeader>
+                <TableBody>
+                  {pendingSetups.map((setup) => (
+                    <TableRow key={setup.id}>
+                      <TableCell>
+                        <div>
+                          <div className="font-medium">{setup.name}</div>
+                          {setup.notes && <div className="text-xs text-muted-foreground line-clamp-1">{setup.notes}</div>}
+                        </div>
+                      </TableCell>
+                      <TableCell className="text-muted-foreground">{setup.car}</TableCell>
+                      <TableCell className="text-muted-foreground">{setup.track}</TableCell>
+                      <TableCell className="text-muted-foreground">Week {setup.week}</TableCell>
+                      <TableCell className="text-muted-foreground">{setup.uploadedByName}</TableCell>
+                      <TableCell className="text-muted-foreground">
+                        {formatDistanceToNow(setup.lastUpdated, { addSuffix: true })}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center justify-end gap-1">
+                          <EditSetupDialog setup={setup} onSave={(updates) => handleEdit(setup.id, updates)} />
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleApprove(setup.id)}
+                            className="text-success hover:text-success"
+                          >
+                            <CheckCircle2 className="h-4 w-4" />
+                            <span className="sr-only">Approve</span>
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleReject(setup.id)}
+                            className="text-destructive hover:text-destructive"
+                          >
+                            <XCircle className="h-4 w-4" />
+                            <span className="sr-only">Reject</span>
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </>
       )}
     </div>
   )

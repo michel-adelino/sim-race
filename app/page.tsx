@@ -81,7 +81,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="space-y-8 relative">
+    <div className="space-y-6 lg:space-y-8 relative">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
       

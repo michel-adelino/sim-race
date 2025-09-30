@@ -253,4 +253,59 @@
   .status-rejected {
     @apply bg-red-500/20 text-red-400 border-red-500/30;
   }
+  
+  /* Mobile-specific enhancements */
+  @media (max-width: 768px) {
+    /* Touch-friendly button sizing */
+    .btn-mobile {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Mobile-optimized spacing */
+    .mobile-spacing {
+      @apply space-y-4;
+    }
+    
+    /* Mobile card padding */
+    .mobile-card {
+      @apply p-4;
+    }
+    
+    /* Mobile text sizing */
+    .mobile-text {
+      @apply text-sm;
+    }
+    
+    /* Mobile-friendly form inputs */
+    .mobile-input {
+      @apply h-12 text-base;
+    }
+    
+    /* Mobile navigation touch targets */
+    .mobile-nav-item {
+      @apply min-h-[48px] px-4 py-3;
+    }
+    
+    /* Mobile table responsive */
+    .mobile-table {
+      @apply text-sm;
+    }
+    
+    /* Mobile modal adjustments */
+    .mobile-modal {
+      @apply mx-4 my-8 max-h-[calc(100vh-4rem)];
+    }
+  }
+  
+  /* Tablet optimizations */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .tablet-grid {
+      @apply grid-cols-2;
+    }
+    
+    .tablet-spacing {
+      @apply space-y-6;
+    }
+  }
 }

@@ -97,7 +97,65 @@ export default function RolesPage() {
         </Card>
       </div>
 
-      <Card>
+      {/* Mobile Card View */}
+      <div className="lg:hidden space-y-4">
+        {users.map((user) => (
+          <Card key={user.id} className="card-hover">
+            <CardContent className="p-4">
+              <div className="space-y-3">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-medium text-foreground truncate">{user.name}</h3>
+                    <p className="text-sm text-muted-foreground truncate">{user.email}</p>
+                  </div>
+                  <Badge variant={getRoleBadgeVariant(user.role)} className="gap-1">
+                    {getRoleIcon(user.role)}
+                    <span className="capitalize">{user.role}</span>
+                  </Badge>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-muted-foreground">
+                    {user.id === currentUser.id ? "Your account" : "Team member"}
+                  </span>
+                  <Select
+                    value={user.role}
+                    onValueChange={(value) => handleRoleChange(user.id, value as UserRole)}
+                    disabled={user.id === currentUser.id}
+                  >
+                    <SelectTrigger className="w-[140px]">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="user">
+                        <div className="flex items-center gap-2">
+                          <User className="h-4 w-4" />
+                          <span>User</span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="admin">
+                        <div className="flex items-center gap-2">
+                          <Shield className="h-4 w-4" />
+                          <span>Admin</span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="superuser">
+                        <div className="flex items-center gap-2">
+                          <Crown className="h-4 w-4" />
+                          <span>Superuser</span>
+                        </div>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Desktop Table View */}
+      <Card className="hidden lg:block">
         <CardHeader>
           <CardTitle>Team Members</CardTitle>
           <CardDescription>Manage roles and permissions for all team members.</CardDescription>
